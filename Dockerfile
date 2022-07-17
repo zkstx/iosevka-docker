@@ -13,8 +13,8 @@ ARG OTFCC_VER=0.10.4
 ARG PREMAKE_VER=5.0.0-alpha15
 ARG NODE_VER=14
 
-RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
+RUN sudo apt-get update \
+    && DEBIAN_FRONTEND=noninteractive sudo apt-get install --no-install-recommends -y \
         build-essential \
 	jq \
         file \
@@ -22,7 +22,7 @@ RUN apt-get update \
         ca-certificates \
         ttfautohint \
     && curl -sSL https://deb.nodesource.com/setup_${NODE_VER}.x | bash - \
-    && apt-get install -y nodejs \
+    && sudo apt-get install -y nodejs \
     && cd /tmp \
     && curl -sSLo premake5.tar.gz https://github.com/premake/premake-core/releases/download/v${PREMAKE_VER}/premake-${PREMAKE_VER}-linux.tar.gz \
     && tar xvf premake5.tar.gz \
