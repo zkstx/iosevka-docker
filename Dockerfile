@@ -14,7 +14,7 @@ ARG PREMAKE_VER=5.0.0-alpha15
 ARG NODE_VER=14
 
 RUN sudo apt-get update \
-    && DEBIAN_FRONTEND=noninteractive sudo apt-get install --no-install-recommends -y \
+    && sudo DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
         build-essential \
 	jq \
         file \
