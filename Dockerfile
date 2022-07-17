@@ -22,7 +22,7 @@ RUN sudo apt-get install --no-install-recommends -y \
         curl \
         ca-certificates \
         ttfautohint
-RUN curl -sSL https://deb.nodesource.com/setup_${NODE_VER}.x | bash -
+RUN curl -sSL https://deb.nodesource.com/setup_${NODE_VER}.x | sudo bash -
 RUN sudo apt-get install -y nodejs
 RUN cd /tmp
 RUN curl -sSLo premake5.tar.gz https://github.com/premake/premake-core/releases/download/v${PREMAKE_VER}/premake-${PREMAKE_VER}-linux.tar.gz
