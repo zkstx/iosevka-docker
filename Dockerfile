@@ -7,7 +7,7 @@
 #     -v ./build:/build \
 #     iosevka_build
 
-FROM gitpod/workspace-base
+FROM gitpod/workspace-base:latest
 
 ARG OTFCC_VER=0.10.4
 ARG PREMAKE_VER=5.0.0-alpha15
