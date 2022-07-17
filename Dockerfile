@@ -13,35 +13,35 @@ ARG OTFCC_VER=0.10.4
 ARG PREMAKE_VER=5.0.0-alpha15
 ARG NODE_VER=14
 
-RUN sudo dpkg-reconfigure debconf --frontend=noninteractive
-RUN sudo apt-get update
-RUN sudo apt-get install --no-install-recommends -y \
+RUN sudo dpkg-reconfigure debconf --frontend=noninteractive \
+    && sudo apt-get update \
+    && sudo apt-get install --no-install-recommends -y \
         build-essential \
-	jq \
+	    jq \
         file \
         curl \
         ca-certificates \
-        ttfautohint
-RUN curl -sSL https://deb.nodesource.com/setup_${NODE_VER}.x | sudo bash -
-RUN sudo apt-get install -y nodejs
-RUN cd /tmp
-RUN curl -sSLo premake5.tar.gz https://github.com/premake/premake-core/releases/download/v${PREMAKE_VER}/premake-${PREMAKE_VER}-linux.tar.gz
-RUN tar xvf premake5.tar.gz
-RUN sudo mv premake5 /usr/local/bin/premake5
-RUN rm premake5.tar.gz
-RUN curl -sSLo otfcc.tar.gz https://github.com/caryll/otfcc/archive/v${OTFCC_VER}.tar.gz
-RUN tar xvf otfcc.tar.gz
-RUN mv otfcc-${OTFCC_VER} otfcc
-RUN cd /tmp/otfcc
+        ttfautohint 
+    && curl -sSL https://deb.nodesource.com/setup_${NODE_VER}.x | sudo bash -
+    && sudo apt-get install -y nodejs
+WORKDIR /tmp
+RUN curl -sSLo premake5.tar.gz https://github.com/premake/premake-core/releases/download/v${PREMAKE_VER}/premake-${PREMAKE_VER}-linux.tar.gz \
+    && tar xvf premake5.tar.gz \
+    && sudo mv premake5 /usr/local/bin/premake5 \
+    && rm premake5.tar.gz \
+    && curl -sSLo otfcc.tar.gz https://github.com/caryll/otfcc/archive/v${OTFCC_VER}.tar.gz \
+    && tar xvf otfcc.tar.gz \
+    && mv otfcc-${OTFCC_VER} otfcc
+WORKDIR /tmp/otfcc
 RUN premake5 gmake
-RUN cd build/gmake
+WORKDIR /tmp/otfcc/build/gmake
 RUN make config=release_x64
-RUN cd /tmp/otfcc/bin/release-x64
-RUN sudo mv otfccbuild /usr/local/bin/otfccbuild
-RUN sudo mv otfccdump /usr/local/bin/otfccdump
-RUN cd /tmp
-RUN rm -rf otfcc/ otfcc.tar.gz
-RUN sudo rm -rf /var/lib/apt/lists/*
+WORKDIR /tmp/otfcc/bin/release-x64
+RUN sudo mv otfccbuild /usr/local/bin/otfccbuild \
+    && sudo mv otfccdump /usr/local/bin/otfccdump
+WORKDIR /tmp
+RUN rm -rf otfcc/ otfcc.tar.gz \
+    && sudo rm -rf /var/lib/apt/lists/*
 
 COPY run.sh /run.sh
 
