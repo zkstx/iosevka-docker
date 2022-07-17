@@ -27,7 +27,7 @@ RUN sudo apt-get install -y nodejs
 RUN cd /tmp
 RUN curl -sSLo premake5.tar.gz https://github.com/premake/premake-core/releases/download/v${PREMAKE_VER}/premake-${PREMAKE_VER}-linux.tar.gz
 RUN tar xvf premake5.tar.gz
-RUN mv premake5 /usr/local/bin/premake5
+RUN sudo mv premake5 /usr/local/bin/premake5
 RUN rm premake5.tar.gz
 RUN curl -sSLo otfcc.tar.gz https://github.com/caryll/otfcc/archive/v${OTFCC_VER}.tar.gz
 RUN tar xvf otfcc.tar.gz
@@ -37,11 +37,11 @@ RUN premake5 gmake
 RUN cd build/gmake
 RUN make config=release_x64
 RUN cd /tmp/otfcc/bin/release-x64
-RUN mv otfccbuild /usr/local/bin/otfccbuild
-RUN mv otfccdump /usr/local/bin/otfccdump
+RUN sudo mv otfccbuild /usr/local/bin/otfccbuild
+RUN sudo mv otfccdump /usr/local/bin/otfccdump
 RUN cd /tmp
 RUN rm -rf otfcc/ otfcc.tar.gz
-RUN rm -rf /var/lib/apt/lists/*
+RUN sudo rm -rf /var/lib/apt/lists/*
 
 COPY run.sh /run.sh
 
