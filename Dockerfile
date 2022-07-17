@@ -7,7 +7,7 @@
 #     -v ./build:/build \
 #     iosevka_build
 
-FROM debian:buster-slim
+FROM gitpod/workspace-base
 
 ARG OTFCC_VER=0.10.4
 ARG PREMAKE_VER=5.0.0-alpha15
