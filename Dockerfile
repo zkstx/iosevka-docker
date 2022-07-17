@@ -17,12 +17,12 @@ RUN sudo dpkg-reconfigure debconf --frontend=noninteractive \
     && sudo apt-get update \
     && sudo apt-get install --no-install-recommends -y \
         build-essential \
-	    jq \
+	jq \
         file \
         curl \
         ca-certificates \
-        ttfautohint 
-    && curl -sSL https://deb.nodesource.com/setup_${NODE_VER}.x | sudo bash -
+        ttfautohint \
+    && curl -sSL https://deb.nodesource.com/setup_${NODE_VER}.x | sudo bash - \
     && sudo apt-get install -y nodejs
 WORKDIR /tmp
 RUN curl -sSLo premake5.tar.gz https://github.com/premake/premake-core/releases/download/v${PREMAKE_VER}/premake-${PREMAKE_VER}-linux.tar.gz \
