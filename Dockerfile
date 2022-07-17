@@ -13,8 +13,9 @@ ARG OTFCC_VER=0.10.4
 ARG PREMAKE_VER=5.0.0-alpha15
 ARG NODE_VER=14
 
+RUN sudo dpkg-reconfigure debconf --frontend=noninteractive
 RUN sudo apt-get update
-RUN sudo DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
+RUN sudo apt-get install --no-install-recommends -y \
         build-essential \
 	jq \
         file \
